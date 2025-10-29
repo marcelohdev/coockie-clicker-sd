@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin-top: 50px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+#game {
+    display: inline-block;
+}
+
+#cookie-btn {
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    /* Animação suave ao clicar */
+    transition: transform 0.1s ease-in-out;
+}
+
+#cookie-btn:active {
+    /* Efeito de clique */
+    transform: scale(0.95);
+}
+
+#status-message {
+    font-size: 0.9em;
+    color: green;
+    height: 20px; /* Evita que a página pule */
+}

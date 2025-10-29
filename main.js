@@ -58,7 +58,7 @@ async function handleCookieClick(event) {
     // --- Lógica da API (seu código original) ---
     const dadosParaEnviar = {
         pontuacao: Math.floor(score), 
-        jogador: 'marc' // Você pode personalizar isso
+        jogador: 'marcelo_henrique' // Você pode personalizar isso
     };
 
     // 4. Tenta enviar os dados para o back-end (API Gateway)
@@ -121,7 +121,10 @@ cursorButton.addEventListener('click', function() {
         cursorCost = Math.ceil(cursorCost * 1.15); 
         cursorCostDisplay.textContent = cursorCost;
         
-        updateBuildingUI('cursor', cursorCount, 'Cursor');
+        // ===============================================
+        // === MUDANÇA AQUI: Adicionado emoji 👆 ===
+        // ===============================================
+        updateBuildingUI('cursor', cursorCount, '👆 Cursor');
         addSpinningCursor(); // Chama o cursor giratório
 
     } else {
@@ -142,12 +145,11 @@ grandmaButton.addEventListener('click', function() {
         grandmaCost = Math.ceil(grandmaCost * 1.15); 
         grandmaCostDisplay.textContent = grandmaCost;
 
-        updateBuildingUI('grandma', grandmaCount, 'Avó');
-
         // ===============================================
-        // === NOVO: Chama a função para criar a avó ===
+        // === MUDANÇA AQUI: Adicionado emoji 👵 ===
         // ===============================================
-        addSpinningGrandma();
+        updateBuildingUI('grandma', grandmaCount, '👵 Avó');
+        addSpinningGrandma(); // Chama a avó giratória
 
     } else {
         showStatusMessage('Cookies insuficientes!', 'red');
@@ -192,28 +194,23 @@ function addSpinningCursor() {
     cookieButton.appendChild(orbit);
 }
 
-// 12. NOVO: Função para criar uma avó giratória
+// 12. Função para criar uma avó giratória
 function addSpinningGrandma() {
-    // 1. Cria a órbita <div>
     const orbit = document.createElement('div');
     orbit.className = 'grandma-orbit';
 
-    // 2. Cria a avó <div> (com emoji)
     const grandma = document.createElement('div');
     grandma.className = 'spinning-grandma';
-    grandma.textContent = '👵'; // O emoji da avó
+    grandma.textContent = '👵'; 
 
-    // 3. Stagger (escalona) a animação
-    // Usa a contagem de avós para espalhá-las
     orbit.style.animationDelay = `-${(grandmaCount * 1.5).toFixed(1)}s`;
 
-    // 4. Monta (Avó dentro da Órbita, Órbita dentro do Botão-Cookie)
     orbit.appendChild(grandma);
     cookieButton.appendChild(orbit);
 }
 
 
-// 13. O "Game Loop" principal (era o 12)
+// 13. O "Game Loop" principal
 setInterval(function() {
     if (cookiesPerSecond > 0) {
         score += cookiesPerSecond;

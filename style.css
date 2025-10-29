@@ -289,3 +289,51 @@ h1, h2, h3 {
         transform: translate(-50%, -80px); /* Sobe 80px */
     }
 }
+
+/* ... (Todo o seu CSS existente fica aqui) ... */
+
+
+/* =======================================================
+=== NOVO: REGRAS PARA CELULAR (DESIGN RESPONSIVO) ===
+=======================================================
+*/
+
+/* 'max-width: 900px' significa: 
+  "Aplicar estas regras em qualquer tela com 900px de largura ou menos"
+*/
+@media (max-width: 900px) {
+    
+    body {
+        overflow: auto; /* 1. Permite rolar a página verticalmente */
+    }
+    
+    .game-container {
+        flex-direction: column; /* 2. Empilha as 3 colunas (Cima, Meio, Baixo) */
+        height: auto; /* 3. A altura total será a soma das colunas */
+    }
+    
+    .column {
+        height: auto; /* 4. A altura de CADA coluna se ajusta ao conteúdo */
+        flex-basis: 100%; /* 5. Cada coluna agora ocupa 100% da LARGURA */
+        
+        /* 6. Remove as bordas laterais e adiciona uma inferior */
+        border-right: none; 
+        border-left: none;
+        border-bottom: 4px solid #3a1e0b; 
+    }
+
+    /* Ajuste fino na coluna do cookie para ela ter um tamanho bom */
+    #left-column {
+        min-height: 500px; 
+    }
+
+    /* Ajusta a cor da borda do meio */
+    #middle-column {
+        border-bottom: 4px solid #573015;
+    }
+
+    /* Remove a borda da última coluna */
+    #right-column {
+        border-bottom: none; 
+    }
+}

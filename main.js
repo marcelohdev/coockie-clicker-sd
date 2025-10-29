@@ -35,12 +35,11 @@ let grandmaCount = 0;
 let firstBuildingPurchased = false; // Controla o placeholder
 
 // 3. A função principal que é chamada a cada clique
-// NOVO: Adicionado 'event' como parâmetro
 async function handleCookieClick(event) {
     score++;
     updateScoreDisplay(); 
 
-    // --- NOVO: LÓGICA DO NÚMERO FLUTUANTE ---
+    // --- LÓGICA DO NÚMERO FLUTUANTE ---
     
     // 1. Criar o elemento <div> para o número
     const number = document.createElement('div');
@@ -111,7 +110,6 @@ function showStatusMessage(message, color) {
 }
 
 // 6. "Ouvir" o clique no cookie e chamar a função principal
-// NOVO: A função agora passa o 'event' automaticamente
 cookieButton.addEventListener('click', handleCookieClick);
 
 // ----------------------------------------------------------------
@@ -181,9 +179,18 @@ function updateBuildingUI(id, count, name) {
         itemUI = document.createElement('div');
         itemUI.id = 'building-' + id;
         itemUI.className = 'building-item';
-        itemUI.innerHTML = `<span class="building-name">${name}</span><span class"building-count">${count}</span>`;
+        
+        /*
+        =================================
+        !!! A CORREÇÃO ESTÁ AQUI !!!
+        Faltava um "=" em class"building-count"
+        =================================
+        */
+        itemUI.innerHTML = `<span class="building-name">${name}</span><span class="building-count">${count}</span>`;
+        
         buildingsList.appendChild(itemUI);
     } else {
+        // Agora isso vai funcionar
         itemUI.querySelector('.building-count').textContent = count;
     }
 }

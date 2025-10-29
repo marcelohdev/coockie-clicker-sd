@@ -103,6 +103,9 @@ h1, h2, h3 {
     
     /* Impede que a imagem (separadamente) receba cliques */
     pointer-events: none; 
+    
+    user-select: none; /* Impede a seleção/arraste da imagem */
+    -webkit-user-drag: none; /* Propriedade específica para Chrome/Safari */
 }
 
 /* O EFEITO DE AURA/BRILHO PULSANTE */

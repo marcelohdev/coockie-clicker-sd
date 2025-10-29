@@ -337,3 +337,114 @@ h1, h2, h3 {
         border-bottom: none; 
     }
 }
+
+/* ... (Todo o seu CSS existente fica aqui) ... */
+
+
+/* ===============================================
+=== NOVO: Estilo para Cursores Giratórios ===
+===============================================
+*/
+
+/* Define a animação de rotação */
+@keyframes orbit-rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 1. A Órbita (O <div> invisível que gira) */
+.cursor-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    /* Diâmetro da órbita. 
+       Raio = 150px (metade da largura/altura)
+       Isso faz ele girar FORA do cookie (que tem 250px)
+    */
+    width: 300px;
+    height: 300px;
+    
+    /* Truque para centralizar a órbita no cookie */
+    margin-top: -150px;  /* Metade da altura (negativa) */
+    margin-left: -150px; /* Metade da largura (negativa) */
+    
+    /* Aplica a animação de 10s */
+    animation: orbit-rotation 10s linear infinite;
+    
+    /* Garante que a órbita não bloqueie o clique no cookie */
+    pointer-events: none;
+    z-index: 3; /* Acima do cookie (2) e do brilho (1) */
+}
+
+/* 2. O Cursor (O emoji 👆) */
+.spinning-cursor {
+    position: absolute;
+    
+    /* Coloca o cursor no "topo" da órbita */
+    top: 0;
+    left: 50%;
+    
+    font-size: 30px;
+    
+    /* Gira o emoji para "apontar" para o centro do cookie */
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+/* ... (Todo o seu CSS existente, incluindo o .spinning-cursor) ... */
+
+
+/* ===============================================
+=== NOVO: Estilo para Avós Giratórias ===
+===============================================
+*/
+
+/* Define a animação de rotação REVERSA */
+@keyframes reverse-orbit-rotation {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+/* 1. A Órbita da Avó (um pouco maior e mais lenta) */
+.grandma-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    /* Diâmetro da órbita maior: 360px (cursor é 300px) */
+    width: 360px;
+    height: 360px;
+    
+    /* Truque para centralizar a órbita no cookie */
+    margin-top: -180px;  /* Metade da altura (negativa) */
+    margin-left: -180px; /* Metade da largura (negativa) */
+    
+    /* Aplica a animação REVERSA e mais lenta (20s) */
+    animation: reverse-orbit-rotation 20s linear infinite;
+    
+    /* Garante que a órbita não bloqueie o clique no cookie */
+    pointer-events: none;
+    z-index: 2; /* Fica ATRÁS do cursor (3) mas na frente do brilho (1) */
+}
+
+/* 2. A Avó (O emoji 👵) */
+.spinning-grandma {
+    position: absolute;
+    
+    /* Coloca a avó no "topo" da órbita */
+    top: 0;
+    left: 50%;
+    
+    font-size: 30px;
+    
+    /* Gira o emoji (opcional, mas dá um charme) */
+    transform: translateX(-50%) rotate(45deg);
+}

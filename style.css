@@ -1,33 +1,288 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
-    margin-top: 50px;
+/* Importa a fonte do HTML */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
+/* Reseta o básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1, h2 {
-    color: #333;
+body {
+    font-family: 'Merriweather', serif;
+    color: #f0f0f0; /* Texto claro para o fundo escuro */
+    
+    /* Este é o truque para o fundo texturizado escuro, 
+      como na imagem de referência 
+    */
+    background-color: #0d2c4a; /* Cor base azul bem escura */
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.02) 0px,
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px,
+        transparent 10px
+    );
+    overflow: hidden; /* Impede barras de rolagem desnecessárias */
+}
+
+h1, h2, h3 {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* O container principal que segura as 3 colunas */
+.game-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Estilo padrão para todas as colunas */
+.column {
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto; /* Permite rolar se o conteúdo for muito grande */
+}
+
+/* === COLUNA ESQUERDA (Cookie) === */
+#left-column {
+    flex-basis: 350px; /* Largura fixa */
+    border-right: 4px solid #3a1e0b; /* Borda escura (simulando madeira) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #game {
-    display: inline-block;
+    text-align: center;
+    width: 100%;
 }
 
-#cookie-btn {
-    width: 250px;
-    height: 250px;
-    cursor: pointer;
-    /* Animação suave ao clicar */
-    transition: transform 0.1s ease-in-out;
-}
-
-#cookie-btn:active {
-    /* Efeito de clique */
-    transform: scale(0.95);
+#game h2 {
+    font-size: 2em;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 #status-message {
     font-size: 0.9em;
     color: green;
-    height: 20px; /* Evita que a página pule */
+    height: 20px;
+    margin-top: 10px;
+}
+
+/* O ID #cookie-btn agora é o CONTAINER (CORREÇÃO APLICADA) */
+#cookie-btn {
+    margin-top: 50px;
+    position: relative; /* Necessário para o brilho */
+    display: inline-block;
+    
+    /* O tamanho e o cursor estão aqui */
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    
+    /* A animação de clique está aqui */
+    transition: transform 0.1s ease-in-out;
+}
+
+#cookie-btn:active {
+    /* O efeito de clique */
+    transform: scale(0.95);
+}
+
+/* O ID novo para a IMAGEM (CORREÇÃO APLICADA) */
+#cookie-image {
+    width: 100%; /* Ocupa 100% do container */
+    height: 100%;
+    
+    /* Coloca o cookie *acima* do brilho */
+    position: relative;
+    z-index: 2;
+    
+    /* Impede que a imagem (separadamente) receba cliques */
+    pointer-events: none; 
+}
+
+/* O EFEITO DE AURA/BRILHO PULSANTE */
+#cookie-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    
+    /* Este é o brilho! */
+    box-shadow: 0 0 30px 20px rgba(255, 255, 255, 0.2);
+    
+    border-radius: 50%;
+    z-index: 1; /* Fica atrás do cookie (z-index: 2) */
+    
+    /* Chama a animação 'pulse' */
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 30px 20px rgba(255, 255, 255, 0.2);
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 0 0 50px 30px rgba(255, 255, 255, 0.1);
+        opacity: 0.7;
+    }
+    100% {
+        box-shadow: 0 0 30px 20px rgba(255, 255, 255, 0.2);
+        opacity: 1;
+    }
+}
+
+
+/* === COLUNA DO MEIO (Construções) === */
+#middle-column {
+    flex: 1; /* Ocupa o espaço restante */
+    background-color: rgba(0, 0, 0, 0.2); /* Painel central escuro */
+    border-left: 4px solid #573015;
+    border-right: 4px solid #573015;
+}
+
+.placeholder-text {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #aaa;
+}
+
+
+/* === COLUNA DIREITA (Loja) === */
+#right-column {
+    flex-basis: 350px; /* Largura fixa */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #3a1e0b;
+}
+
+/* Estilo dos painéis (usado no Meio e na Direita) */
+.panel-header {
+    font-size: 1.5em;
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid #573015;
+    margin-bottom: 10px;
+}
+
+.store-item {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.store-item:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para item que não pode ser comprado */
+.store-item.unavailable {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #888;
+    cursor: not-allowed; /* Impede o clique */
+    opacity: 0.5; /* Deixa mais transparente */
+}
+
+/* Remove o :hover de itens indisponíveis */
+.store-item.unavailable:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+/* Estilo para item que não pode ser comprado */
+.store-item.unavailable {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #888;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Remove o :hover de itens indisponíveis */
+.store-item.unavailable:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+/* ===============================================
+=== NOVO: Estilo para Construções (Coluna do Meio) ===
+===============================================
+*/
+.building-item {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    
+    /* Importante: Alinha nome e contagem */
+    display: flex;
+    justify-content: space-between; /* "Nome" ... "Contagem" */
+    align-items: center;
+    
+    font-size: 1.1em;
+}
+
+.building-item .building-name {
+    color: #fff;
+}
+
+.building-item .building-count {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #eee;
+    /* Adiciona um fundo leve para destacar o número */
+    background-color: rgba(0,0,0,0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* ... (todo o seu CSS existente) ... */
+
+/* Remove o :hover de itens indisponíveis */
+.store-item.unavailable:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+/* ===============================================
+=== NOVO: Estilo para Números Flutuantes (+1) ===
+===============================================
+*/
+.floating-number {
+    position: absolute; /* Permite flutuar sobre o cookie */
+    font-size: 2em; /* Tamanho do texto */
+    font-weight: bold;
+    color: white; /* Cor do texto */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra para legibilidade */
+    
+    /* Pega a animação 'float-up' */
+    animation: float-up 1s ease-out forwards;
+    
+    /* Impede que o texto "roube" o clique */
+    pointer-events: none;
+    user-select: none;
+    
+    z-index: 10; /* Garante que fique acima do cookie e do brilho */
+}
+
+/* A animação em si */
+@keyframes float-up {
+    from {
+        opacity: 1;
+        transform: translate(-50%, 0); /* Começa no lugar do clique */
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -80px); /* Sobe 80px */
+    }
 }

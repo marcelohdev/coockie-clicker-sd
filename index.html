@@ -4,18 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookie Clicker - SD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Cookie Clicker</h1>
-    
-    <div id="game">
-        <img src="cookie.png" id="cookie-btn" alt="Clique no cookie!">
+
+    <main class="game-container">
         
-        <h2>Pontuação: <span id="score-display">0</span></h2>
-        
-        <p id="status-message"></p>
-    </div>
+        <section class="column" id="left-column">
+            <div id="game">
+                <h2>Pontuação: <span id="score-display">0</span></h2>
+                <p id="status-message"></p>
+                
+                <div id="cookie-btn" class="cookie-container">
+                    <img src="cookie.png" id="cookie-image" alt="Clique no cookie!">
+                </div>
+            </div>
+        </section>
+
+        <section class="column" id="middle-column">
+            <div class="panel-header">Construções</div>
+            
+            <div class="panel-content" id="buildings-list">
+                <p class="placeholder-text" id="buildings-placeholder">Sua padaria está vazia.</p>
+                </div>
+        </section>
+
+        <section class="column" id="right-column">
+            <div class="panel-header">Loja</div>
+            <div class="panel-content">
+                
+                <div class="store-item" id="buy-cursor">
+                    <h3>Cursor</h3>
+                    <p>Custo: <span id="cursor-cost-display">10</span></p>
+                </div>
+
+                <div class="store-item" id="buy-grandma">
+                    <h3>Avó</h3>
+                    <p>Custo: <span id="grandma-cost-display">100</span></p>
+                </div>
+                
+            </div>
+        </section>
+
+    </main>
 
     <script src="main.js"></script>
 </body>
